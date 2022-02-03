@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  app:
+    image: 'demo-app:latest'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/demo-postgres
+      - SPRING_DATASOURCE_USERNAME=demo-postgres
+      - SPRING_DATASOURCE_PASSWORD=demo-postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - TZ=Europe/Rome
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK=INFO
+      - SPRING_JPA_OPEN-IN-VIEW=false
+    ports:
+      - "8080:8080"
+
+  db:
+    image: 'postgres'
+    container_name: db
+    volumes:
+      - mydb:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=demo-postgres
+      - POSTGRES_PASSWORD=demo-postgres
+      - TZ=Europe/Rome
+    ports:
+      - "5432:5432"
+
+volumes:
+  mydb:
+    driver: local

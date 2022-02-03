@@ -1,0 +1,26 @@
+###### PER CREARE E USARE NEL TEST IL SERVICE
+
+@DataJpaTest
+@TestMethodOrder(MethodOrderer.MethodName.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+public class SpecificationsTest {
+
+    @Autowired
+    UserRepository repository;
+
+    @TestConfiguration
+    static class UserServiceImplTestContextConfiguration {
+        @Bean
+        public UserService userService() {
+            return new UserServiceImpl();
+        }
+    }
+
+    @Autowired
+    UserService userService;
+
+
+
+    .......
+
+}

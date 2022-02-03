@@ -1,0 +1,5 @@
+additionalProperties:
+  # interfaceOnly: "true"
+  modelPackage : "demo.model"
+  apiPackage : "demo.api"
+  useTags: "true"
