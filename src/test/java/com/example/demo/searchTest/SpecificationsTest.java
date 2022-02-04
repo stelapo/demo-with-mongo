@@ -9,12 +9,12 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-@DataJpaTest
+/*@DataJpaTest
 @TestMethodOrder(MethodOrderer.MethodName.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)*/
 public class SpecificationsTest {
 
-    @Autowired
+    /*@Autowired
     UserRepository repository;
 
     private User userLP;
@@ -37,7 +37,7 @@ public class SpecificationsTest {
         userMR.setAddress("Via Pallino, Firenze");
         repository.save(userMR);
     }
-/*
+
     @Test
     public void test01searchWith_Surname() {
         UserSpecification spec =
