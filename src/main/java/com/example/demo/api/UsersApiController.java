@@ -13,7 +13,6 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -79,7 +78,7 @@ public class UsersApiController implements UsersApi {
     }
 
     @Override
-    public ResponseEntity<List<User>> searchUsers(@Pattern(regexp = SearchCriteria.searchStringPatternForController) @RequestParam(value = "searchString", required = false) String searchString, Pageable pageable) {
+    public ResponseEntity<Page<User>> searchUsers(@Pattern(regexp = SearchCriteria.searchStringPatternForController) @RequestParam(value = "searchString", required = false) String searchString, Pageable pageable) {
         if (ApiUtil.applicationJsonHeaderExists(request)) {
             return new ResponseEntity<>(userService.findBySearchString(searchString, pageable), HttpStatus.OK);
         }

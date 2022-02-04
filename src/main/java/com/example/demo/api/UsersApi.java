@@ -12,7 +12,6 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
-import java.util.List;
 import java.util.Optional;
 
 @Validated
@@ -125,7 +124,7 @@ public interface UsersApi {
             value = "/search",
             produces = {"application/json"}
     )
-    default ResponseEntity<List<User>> searchUsers(@Pattern(regexp = SearchCriteria.searchStringPatternForController) @RequestParam(value = "searchString", required = false) String searchString, Pageable pageable) {
+    default ResponseEntity<Page<User>> searchUsers(@Pattern(regexp = SearchCriteria.searchStringPatternForController) @RequestParam(value = "searchString", required = false) String searchString, Pageable pageable) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 

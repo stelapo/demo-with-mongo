@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -89,14 +90,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findBySearchString(String searchString, Pageable pageable) {
+    public Page<User> findBySearchString(String searchString, Pageable pageable) {
         UserQueryBuilder builder = new UserQueryBuilder();
         Pattern pattern = Pattern.compile(SearchCriteria.searchStringPattern);
         Matcher matcher = pattern.matcher(searchString);
         while (matcher.find()) {
             builder.addSearchCriteria(matcher.group(1), matcher.group(2), matcher.group(3));
         }
-        Query query = builder.build();
-        return mongoTemplate.find(query, User.class);
+        Query query = builder.build().with(pageable);
+        List<User> userList = mongoTemplate.find(query, User.class);
+        return PageableExecutionUtils.getPage(
+                userList,
+                pageable,
+                () -> mongoTemplate.count(Query.of(query).limit(-1).skip(-1), User.class));
+
     }
 }
