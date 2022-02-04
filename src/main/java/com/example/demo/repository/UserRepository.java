@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends MongoRepository<User, Long> {
     Page<User> findByNameOrSurname (String name, String surname, Pageable pageable);
+
+    Page<User> findByNameContainingIgnoreCaseAndSurnameContainingIgnoreCase (String name, String surname, Pageable pageable);
+
+
 }

@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.findAll(Specification.where(specName).and(surName), pageable);*/
 
-        return userRepository.findByNameOrSurname(name, surname, pageable);
+        return userRepository.findByNameContainingIgnoreCaseAndSurnameContainingIgnoreCase(name==null?"":name, surname==null?"":surname, pageable);
 
     }
 
