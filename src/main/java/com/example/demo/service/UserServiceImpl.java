@@ -14,12 +14,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    DatabaseSequenceService databaseSequenceService;
-
     @Override
     public User createUser(User user) {
-        user.setUserId(databaseSequenceService.generateSequence(User.SEQUENCE_NAME));
+        user.setUserId(-1l);
         return userRepository.save(user);
     }
 
