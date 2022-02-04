@@ -1,27 +1,13 @@
 package com.example.demo.searchTest;
 
-import com.example.demo.model.SearchCriteria;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.repository.specification.UserSpecification;
-import com.example.demo.repository.specification.UserSpecificationsBuilder;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.jpa.domain.Specification;
-
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.springframework.data.jpa.domain.Specification.where;
 
 @DataJpaTest
 @TestMethodOrder(MethodOrderer.MethodName.class)
@@ -51,7 +37,7 @@ public class SpecificationsTest {
         userMR.setAddress("Via Pallino, Firenze");
         repository.save(userMR);
     }
-
+/*
     @Test
     public void test01searchWith_Surname() {
         UserSpecification spec =
@@ -122,5 +108,5 @@ public class SpecificationsTest {
             assertThat(userMR, is(in(results)));
         }
 
-    }
+    }*/
 }

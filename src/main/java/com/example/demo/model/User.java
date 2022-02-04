@@ -1,22 +1,16 @@
 package com.example.demo.model;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 import javax.validation.constraints.*;
 
 @Data
-@Entity
-@Table(name = "users")
+@Document(collection = "users")
 public class User {
 
     @Id
-    @GeneratedValue(generator = "id_generator")
-    @SequenceGenerator(
-            name = "id_generator",
-            sequenceName = "id_user_sequence",
-            initialValue = 1
-    )
     private Long userId;
 
     @NotBlank(message = "Name mustn't be blank")

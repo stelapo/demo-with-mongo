@@ -2,18 +2,11 @@ package com.example.demo.service;
 
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.User;
-import com.example.demo.model.SearchCriteria;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.repository.specification.UserSpecification;
-import com.example.demo.repository.specification.UserSpecificationsBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,8 +16,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-        if (user.getUserId() != null)
-            user.setUserId(null);
+        /*if (user.getUserId() != null)
+            user.setUserId(null);*/
         return userRepository.save(user);
     }
 
@@ -74,18 +67,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> findByNameAndSurname(String name, String surname, Pageable pageable) {
-        UserSpecification specName =
+        /*UserSpecification specName =
                 new UserSpecification(new SearchCriteria("name", ":", name));
         UserSpecification surName =
                 new UserSpecification(new SearchCriteria("surname", ":", surname));
 
-        return userRepository.findAll(Specification.where(specName).and(surName), pageable);
+        return userRepository.findAll(Specification.where(specName).and(surName), pageable);*/
+
+        return userRepository.findByNameOrSurname(name, surname, pageable);
 
     }
 
     @Override
     public Page<User> findBySearchString(String searchString, Pageable pageable) {
-        UserSpecificationsBuilder builder = new UserSpecificationsBuilder();
+        /*UserSpecificationsBuilder builder = new UserSpecificationsBuilder();
         Pattern pattern = Pattern.compile(SearchCriteria.searchStringPattern);
         Matcher matcher = pattern.matcher(searchString);
         while (matcher.find()) {
@@ -93,6 +88,8 @@ public class UserServiceImpl implements UserService {
         }
 
         Specification<User> spec = builder.build();
-        return userRepository.findAll(spec, pageable);
+        return userRepository.findAll(spec, pageable);*/
+
+        return userRepository.findAll(pageable);
     }
 }

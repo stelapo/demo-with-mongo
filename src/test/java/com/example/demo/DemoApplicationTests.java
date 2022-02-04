@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @SpringBootTest(
-        classes = DemoApplication.class)
+        classes = DemoMongoApplication.class)
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class DemoApplicationTests {
