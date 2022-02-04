@@ -24,7 +24,7 @@ docker-compose up -d
 docker-compose up -d --build
 
 ***
-## Test docker with multiple file
+## Test docker with multiple file => https://docs.docker.com/compose/extends/
 docker-compose -f mongo-stack.yml -f app-demo-stack.yml up -d
 
 # Application components
