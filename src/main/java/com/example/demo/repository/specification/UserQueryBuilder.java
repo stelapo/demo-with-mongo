@@ -1,8 +1,6 @@
 package com.example.demo.repository.specification;
 
 import com.example.demo.model.SearchCriteria;
-import com.example.demo.model.User;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.ArrayList;
@@ -31,9 +29,7 @@ public class UserQueryBuilder {
                 .collect(Collectors.toList());
 
         Query query = new Query();
-        //UserCriteriaQuery specification = specificationList.get(0);
         for (int i = 0; i < specificationList.size(); i++) {
-            //specification = Specification.where(specification).and(specificationList.get(i));
             query.addCriteria(specificationList.get(i));
         }
         return query;
