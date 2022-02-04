@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.*;
@@ -9,6 +10,9 @@ import javax.validation.constraints.*;
 @Data
 @Document(collection = "users")
 public class User {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "users_sequence";
 
     @Id
     private Long userId;
