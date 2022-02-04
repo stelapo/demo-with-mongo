@@ -16,14 +16,8 @@ docker-compose -f mongo-stack.yml up -d
 ## docker force rebuild and run ONLY MONGO STACK ##
 docker-compose -f mongo-stack.yml up -d --build
 
+
 * * *
-## docker build and run ##
-docker-compose up -d
-
-## docker force rebuild and run ##
-docker-compose up -d --build
-
-***
 ## Test docker with multiple file => https://docs.docker.com/compose/extends/
 docker-compose -f mongo-stack.yml -f app-demo-stack.yml up -d
 
