@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -79,7 +79,7 @@ public class UsersApiController implements UsersApi {
     }
 
     @Override
-    public ResponseEntity<Page<User>> searchUsers(@Pattern(regexp = SearchCriteria.searchStringPatternForController) @RequestParam(value = "searchString", required = false) String searchString, Pageable pageable) {
+    public ResponseEntity<List<User>> searchUsers(@Pattern(regexp = SearchCriteria.searchStringPatternForController) @RequestParam(value = "searchString", required = false) String searchString, Pageable pageable) {
         if (ApiUtil.applicationJsonHeaderExists(request)) {
             return new ResponseEntity<>(userService.findBySearchString(searchString, pageable), HttpStatus.OK);
         }

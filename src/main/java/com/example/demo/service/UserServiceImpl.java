@@ -1,18 +1,29 @@
 package com.example.demo.service;
 
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.SearchCriteria;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.specification.UserQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    MongoTemplate mongoTemplate;
 
     @Override
     public User createUser(User user) {
@@ -78,17 +89,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<User> findBySearchString(String searchString, Pageable pageable) {
-        /*UserSpecificationsBuilder builder = new UserSpecificationsBuilder();
+    public List<User> findBySearchString(String searchString, Pageable pageable) {
+        UserQueryBuilder builder = new UserQueryBuilder();
         Pattern pattern = Pattern.compile(SearchCriteria.searchStringPattern);
         Matcher matcher = pattern.matcher(searchString);
         while (matcher.find()) {
             builder.addSearchCriteria(matcher.group(1), matcher.group(2), matcher.group(3));
         }
-
-        Specification<User> spec = builder.build();
-        return userRepository.findAll(spec, pageable);*/
-
-        return userRepository.findAll(pageable);
+        Query query = builder.build();
+        return mongoTemplate.find(query, User.class);
     }
 }

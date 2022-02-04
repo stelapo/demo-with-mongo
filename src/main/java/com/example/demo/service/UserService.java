@@ -4,6 +4,8 @@ import com.example.demo.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface UserService {
     User createUser(User user);
 
@@ -17,5 +19,5 @@ public interface UserService {
 
     Page<User> findByNameAndSurname(String name, String surname, Pageable pageable);
 
-    Page<User> findBySearchString(String searchString, Pageable pageable);
+    List<User> findBySearchString(String searchString, Pageable pageable);
 }
